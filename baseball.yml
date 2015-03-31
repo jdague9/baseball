@@ -1,0 +1,53 @@
+mongoHost: 127.0.0.1
+mongoPort: 27017
+mongoName: baseballDB
+projectBucket: Projects
+customDataBucket: customData
+adminIndex: adminIndex
+sessionTtlMinutes: 0
+authRequired: false
+defaultUser: admin
+defaultPassword: $2a$12$3sjHG4nK5E5RS2eseVJCOOmG/MxV8BIHnhJYu/agFpv6nBKODwSWS
+
+# use the simple server factory if you only want to run on a single port
+#server:
+#  type: simple
+#  connector:
+#    type: http
+#    port: 8080
+
+server:
+#  softNofileLimit: 1000
+#  hardNofileLimit: 1000
+  applicationConnectors:
+    - type: http
+      port: 8080
+    - type: https
+      port: 8443
+      keyStorePath: scandium.keystore
+      keyStorePassword: example
+      validateCerts: false
+# this requires the npn-boot library on the JVM's boot classpath
+#    - type: spdy3
+#      port: 8445
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 8081
+    - type: https
+      port: 8444
+      keyStorePath: scandium.keystore
+      keyStorePassword: example
+      validateCerts: false
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  appenders:
+    - type: console
+      threshold: WARN
